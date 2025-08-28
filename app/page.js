@@ -13,7 +13,7 @@ import { ProjectPage } from '../components/ProjectPage';
 import { CertificatePage } from '../components/CertificationPage';
 import { ContactPage } from '../components/ContactPage';
 
-// Data Mockup untuk seluruh halaman
+
 const portfolioData = {
   name: "Gilbert Geraldo",
   title: "UnderGraduate Student at Data Science @ Telkom University",
@@ -27,16 +27,31 @@ const portfolioData = {
     linkedin: "https://www.linkedin.com/in/gilbert-geraldo-534939364",
   },
   topTracks: [
-    { artist: "Tame Impala", title: "The Less I Know The Better", image: "https://i.scdn.co/image/ab67616d0000b2739e1cfc756886ac782e363d79", previewUrl: "/audio/tame-impala.mp3" },
-    { artist: "Arctic Monkeys", title: "505", image: "https://i.scdn.co/image/ab67616d0000b273d229c629f6262a3687d74542", previewUrl: "/audio/arctic-monkeys.mp3" },
-    { artist: "The Strokes", title: "Reptilia", image: "https://i.scdn.co/image/ab67616d0000b2732134423a54b35581c742c852", previewUrl: "/audio/the-strokes.mp3" },
+    { 
+      artist: "WestLife", 
+      title: "My Love", 
+      image: "/westlive.jpg", 
+      previewUrl: "/audio/MyLive.mp3"
+    },
+    { 
+      artist: "BaraSuara", 
+      title: "Terbuang Dalam Waktu", 
+      image: "https://i.scdn.co/image/ab67616d0000b273d229c629f6262a3687d74542", 
+      previewUrl: "/audio/arctic-monkeys.mp3"
+    },
+    { 
+      artist: "The Strokes", 
+      title: "Reptilia", 
+      image: "https://i.scdn.co/image/ab67616d0000b2732134423a54b35581c742c852", 
+      previewUrl: "/audio/the-strokes.mp3"
+    },
   ],
   projects: [
-    { 
+   { 
       title: "Website Gereja GKPI", 
       description: "Sistem manajemen konten untuk jemaat.", 
       tags: ["Django", "Python", "Html", "Tailwind"],
-      image: "logo.png"
+      image: "/logo.png"
     },
   ],
   certificates: [
@@ -50,14 +65,13 @@ export default function PortfolioPage() {
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState('home');
   
- const sections = [
+  const sections = [
     { id: 'home', icon: <Home size={24} /> },
     { id: 'about', icon: <User size={24} /> },
     { id: 'projects', icon: <Code size={24} /> },
     { id: 'certificates', icon: <Award size={24} /> },
     { id: 'contact', icon: <Mail size={24} /> },
   ];
-
 
   useEffect(() => {
     const timer = setTimeout(() => setLoading(false), 2000);
@@ -67,7 +81,6 @@ export default function PortfolioPage() {
   if (loading) {
     return <LoadingScreen />;
   }
-
   const renderPage = () => {
     switch (page) {
       case 'about': return <AboutPage portfolioData={portfolioData} />;
@@ -77,6 +90,8 @@ export default function PortfolioPage() {
       default: return <HomePage portfolioData={portfolioData} onNavigate={setPage} />;
     }
   };
+
+
 
   return (
     <>
