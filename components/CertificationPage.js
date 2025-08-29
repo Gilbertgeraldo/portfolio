@@ -9,7 +9,6 @@ export const CertificatePage = ({ portfolioData }) => (
   >
     <h2 className="text-4xl font-bold text-white mb-12 text-center">Sertifikat & Pencapaian</h2>
     <div className="w-full max-w-4xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {/* PERBAIKAN: Mengubah 'certification' menjadi 'certificates' */}
       {portfolioData.certificates.map(cert => (
         <motion.div 
           key={cert.title}

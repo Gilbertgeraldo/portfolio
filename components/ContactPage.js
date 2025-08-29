@@ -10,7 +10,7 @@ export const ContactPage = ({ portfolioData }) => (
     >
         <div className="text-center">
             <h2 className="text-5xl font-bold text-white mb-4">Hubungi Saya</h2>
-            <p className="text-slate-300 mb-8">Mari kita wujudkan ide Anda menjadi kenyataan.</p>
+            <p className="text-slate-300 mb-8">Mari kita menjalin komunikasi yang hangat😎💕</p>
             <div className="flex justify-center items-center gap-8">
                 <a href={portfolioData.contact.github} target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-white transition"><Github size={32} /></a>
                 <a href={portfolioData.contact.linkedin} target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-white transition"><Linkedin size={32} /></a>
