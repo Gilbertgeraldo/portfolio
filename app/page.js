@@ -1,16 +1,16 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Home, User, Code, Mail, Award, Star, Music } from 'lucide-react';
-
+// PERBAIKAN: Menambahkan 'Brush' ke dalam daftar impor ikon
+import { Home, User, Code, Mail, Award, Star, Music, Cpu, Brush } from 'lucide-react';
 import { LoadingScreen } from '../components/LoadingScreen';
 import { CustomCursor } from '../components/CustomCursor';
 import { HomePage } from '../components/HomePage';
 import { AboutPage } from '../components/AboutPage';
-import  ProfileCardComponent  from '../components/ProfileCard';
+import ProfileCardComponent from '../components/ProfileCard';
 import TextType from '../components/TextType';
 import { ProjectPage } from '../components/ProjectPage';
-// import { CertificatePage } from '../components/CertificationPage';
+import { CertificatePage } from '../components/CertificationPage';
 import { ContactPage } from '../components/ContactPage';
 
 
@@ -36,13 +36,13 @@ const portfolioData = {
     { 
       artist: "BaraSuara", 
       title: "Terbuang Dalam Waktu", 
-      image: "https://i.scdn.co/image/ab67616d0000b273d229c629f6262a3687d74542", 
+      image: "/barasuara.jpeg", 
       previewUrl: "/audio/Barasuara.mp3"
     },
     { 
       artist: "The Strokes", 
       title: "Reptilia", 
-      image: "https://i.scdn.co/image/ab67616d0000b2732134423a54b35581c742c852", 
+      image: "/reptilia.jpeg", 
       previewUrl: "/audio/the-strokes.mp3"
     },
   ],
@@ -53,23 +53,20 @@ const portfolioData = {
       tags: ["Django", "Python", "Html", "Tailwind"],
       image: "/logo.png"
     },
+    {
+      title: "Portfolio-Website",
+      description: "Membuat portfolio Website Pribadi menggunakan Next.js dan Tailwind CSS.",
+      tags: ["next.js", "React" , "Tailwind CSS"],
+      image: "/portfolio-project.png"
+    },
   ],
-  // MASIH DALAM PENGEMBANGAN!!
+  certificates: [
+    { title: "Pengenalan ke Logika Pemrograman (Programming Logic 101)", issuer: "Dicoding Indonesia", icon: <Award size={32} className="text-yellow-400" />, url:"/sertifikat/Program101.pdf" },
+    { title: "Belajar Dasar Structured Query Language (SQL)", issuer: "Dicoding Indonesia", icon: <Code size={32} className="text-blue-400" />, url:"/sertifikat/SQL.pdf"},
+    { title: "Belajar Dasar Data Science", issuer: "Dicoding Indonesia", icon: <Brush size={32} className="text-green-400" />, url:"/sertifikat/Sains.pdf"},
+    { title: "Memulai Pemrograman Dengan Java", issuer: "Dicoding Indonesia", icon: <Cpu size={32} className="text-purple-400" />, url: "/sertifikat/Java.pdf" }
+  ]
 };
-
-const UnderDevelopmentPage = () => (
-  <motion.div 
-    initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }}
-    transition={{ type: "tween", ease: "anticipate", duration: 0.5 }}
-    className="h-full flex flex-col justify-center items-center text-center"
-  >
-    <div className="bg-black/20 backdrop-blur-xl rounded-2xl border border-white/10 p-12">
-      <Award size={48} className="mx-auto text-yellow-400 mb-4" />
-      <h2 className="text-3xl font-bold text-white">Coming Soon REK!!</h2>
-      <p className="text-slate-400 mt-2">Masih dalam pengembangan!!😎😁</p>
-    </div>
-  </motion.div>
-);
 
 export default function PortfolioPage() {
   const [loading, setLoading] = useState(true);
@@ -95,12 +92,11 @@ export default function PortfolioPage() {
     switch (page) {
       case 'about': return <AboutPage portfolioData={portfolioData} />;
       case 'projects': return <ProjectPage portfolioData={portfolioData} />;
-      case 'certificates': return <UnderDevelopmentPage />;
+      case 'certificates': return <CertificatePage portfolioData={portfolioData} />;
       case 'contact': return <ContactPage portfolioData={portfolioData} />;
       default: return <HomePage portfolioData={portfolioData} onNavigate={setPage} />;
     }
   };
-
 
 
   return (
