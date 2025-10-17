@@ -143,21 +143,21 @@ export const LoadingScreen = () => {
         </motion.div>
 
         {/* Floating particles - lebih sedikit */}
-        {[0, 1, 2].map(i => (
+        {[
+          { x: 80, y: -60, duration: 3 },
+          { x: -90, y: 70, duration: 4 },
+          { x: -70, y: -50, duration: 5 }
+        ].map((particle, i) => (
           <motion.div
             key={`particle-${i}`}
-            initial={{ 
-              x: Math.random() * 200 - 100, 
-              y: Math.random() * 200 - 100,
-              opacity: 0
-            }}
+            initial={{ opacity: 0 }}
             animate={{
-              x: Math.random() * 200 - 100,
-              y: Math.random() * 200 - 100,
+              x: [particle.x, -particle.x, particle.x],
+              y: [particle.y, -particle.y, particle.y],
               opacity: [0, 0.5, 0]
             }}
             transition={{ 
-              duration: 3 + i,
+              duration: particle.duration,
               repeat: Infinity,
               ease: "easeInOut"
             }}
