@@ -1,8 +1,8 @@
 import './globals.css'
 
 export const metadata = {
-  title: "Gilbert Geraldo's Portfolio",
-  description: 'Portfolio pribadi Gilbert Geraldo, seorang Full Stack Developer.',
+  title: "Gilbert Geraldo",
+  description: 'B E R T',
 }
 
 export default function RootLayout({ children }) {

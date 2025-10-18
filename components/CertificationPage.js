@@ -8,7 +8,7 @@ export const CertificatePage = ({ portfolioData }) => (
     animate={{ opacity: 1, y: 0 }}
     exit={{ opacity: 0, y: -20 }}
     transition={{ type: "tween", ease: "anticipate", duration: 0.5 }}
-    className="h-full flex flex-col justify-center items-center relative"
+    className="w-full h-full flex flex-col items-center relative overflow-hidden"
   >
     {/* Background gradient elements */}
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -16,7 +16,7 @@ export const CertificatePage = ({ portfolioData }) => (
       <div className="absolute bottom-20 right-10 w-72 h-72 bg-purple-500/10 rounded-full blur-3xl"></div>
     </div>
 
-    <div className="w-full max-w-7xl text-center relative z-10">
+    <div className="w-full max-w-4xl text-center relative z-10 px-4 py-8 overflow-y-auto h-full flex flex-col scroll-smooth scrollbar-hide [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-slate-600/30 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb:hover]:bg-slate-600/50">
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -39,59 +39,64 @@ export const CertificatePage = ({ portfolioData }) => (
         Koleksi sertifikasi profesional dan pencapaian
       </motion.p>
       
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 md:gap-8">
+      {/* Grid dengan layout landscape */}
+      <div className="flex flex-col gap-4 md:gap-5 px-4 max-w-4xl mx-auto w-full">
         {portfolioData?.certificates?.map((cert, index) => (
-          <motion.a
+          <motion.div
             key={cert.title}
-            href={cert.url}
-            target="_blank"
-            rel="noopener noreferrer"
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: index * 0.08 }}
-            whileHover={{ y: -12 }}
-            className="group relative"
+            whileHover={{ y: -4 }}
+            className="group relative w-full"
           >
-            {/* Card Container */}
-            <div className="relative h-full rounded-2xl overflow-hidden">
+            {/* Card Container - Landscape */}
+            <div className="relative rounded-xl overflow-hidden cursor-pointer h-32 md:h-40">
               {/* Animated border gradient */}
               <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-pink-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               
               {/* Background blur effect */}
               <div className="absolute inset-0 bg-gradient-to-b from-white/5 to-white/0 backdrop-blur-md rounded-2xl border border-white/10 group-hover:border-white/20 transition-all duration-300"></div>
 
-              {/* Content */}
-              <div className="relative z-10 flex flex-col h-full">
-                {/* Image Container */}
-                <div className="w-full aspect-[4/5] overflow-hidden bg-gradient-to-b from-slate-900/50 to-slate-900/80">
+              {/* Content - Flexbox horizontal */}
+              <div className="relative z-10 flex flex-row h-full">
+                {/* Image Container - Clickable (lebih lebar) */}
+                <a
+                  href={cert.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 overflow-hidden bg-gradient-to-b from-slate-900/50 to-slate-900/80 block"
+                >
                   <img 
                     src={cert.previewImage} 
                     alt={cert.title} 
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 brightness-90 group-hover:brightness-100"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 brightness-90 group-hover:brightness-100"
                   />
                   {/* Shine effect overlay */}
                   <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/0 to-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                </div>
+                </a>
 
-                {/* Text Content */}
-                <div className="p-5 flex-grow flex flex-col justify-between">
+                {/* Text Content - Di sebelah kanan */}
+                <div className="p-6 md:p-8 flex-1 flex flex-col justify-between">
                   <div>
-                    <h3 className="text-sm md:text-base font-bold text-white leading-snug group-hover:text-blue-300 transition-colors duration-300">
+                    <h3 className="text-base md:text-lg font-bold text-white leading-snug group-hover:text-blue-300 transition-colors duration-300 text-left">
                       {cert.title}
                     </h3>
-                    <p className="text-xs text-slate-400 mt-2 group-hover:text-slate-300 transition-colors duration-300">
+                    <p className="text-sm text-slate-400 mt-3 group-hover:text-slate-300 transition-colors duration-300 text-left">
                       {cert.issuer}
                     </p>
                   </div>
 
-                  {/* External Link Button */}
-                  <motion.div 
-                    whileHover={{ scale: 1.1 }}
-                    className="mt-4 inline-flex items-center gap-1 text-xs font-medium text-blue-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  {/* External Link Button - Clickable */}
+                  <a 
+                    href={cert.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-sm font-medium text-blue-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:text-blue-300 mt-4"
                   >
-                    <span>Lihat</span>
-                    <ExternalLink size={14} />
-                  </motion.div>
+                    <span>Lihat Sertifikat</span>
+                    <ExternalLink size={16} />
+                  </a>
                 </div>
               </div>
 
@@ -110,12 +115,12 @@ export const CertificatePage = ({ portfolioData }) => (
               initial={false}
               whileHover={{ scale: 1.2 }}
             />
-          </motion.a>
+          </motion.div>
         ))}
       </div>
 
       {/* Empty State */}
-      {!portfolioData?.certificates || portfolioData.certificates.length === 0 && (
+      {(!portfolioData?.certificates || portfolioData.certificates.length === 0) && (
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -129,42 +134,6 @@ export const CertificatePage = ({ portfolioData }) => (
   </motion.div>
 );
 
-// Mock data untuk preview
 export default function App() {
-  const mockData = {
-    certificates: [
-      {
-        title: "React Advanced",
-        issuer: "Udemy",
-        previewImage: "https://images.unsplash.com/photo-1633356122544-f134324ef6db?w=400&h=500&fit=crop",
-        url: "#"
-      },
-      {
-        title: "JavaScript Master",
-        issuer: "Coursera",
-        previewImage: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=400&h=500&fit=crop",
-        url: "#"
-      },
-      {
-        title: "Web Design",
-        issuer: "Skillshare",
-        previewImage: "https://images.unsplash.com/photo-1516321318423-f06f70e504f4?w=400&h=500&fit=crop",
-        url: "#"
-      },
-      {
-        title: "UI/UX Design",
-        issuer: "Figma Academy",
-        previewImage: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=400&h=500&fit=crop",
-        url: "#"
-      },
-      {
-        title: "Cloud Computing",
-        issuer: "AWS",
-        previewImage: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&h=500&fit=crop",
-        url: "#"
-      },
-    ]
-  };
-
   return <CertificatePage portfolioData={mockData} />;
 }
